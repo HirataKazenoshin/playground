@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 )
 
 var scanner = bufio.NewScanner(os.Stdin)
@@ -14,29 +15,16 @@ func nextLine() string {
 }
 
 func main() {
-	var cnt1, cnt2, cnt3 int
 	N := nextLine()
-	for _, i := range N {
-		if i == '1' {
-			cnt1 = cnt1 + 1
-			if cnt1 == 2 {
-				fmt.Println("No")
-			}
-		} else if i == '2' {
-			cnt2 = cnt2 + 1
-			if cnt2 == 3 {
-				fmt.Println("No")
-			}
-		} else if i == '3' {
-			cnt3 = cnt3 + 1
-			if cnt3 == 4 {
-				fmt.Println("No")
-			}
-		} else {
-			fmt.Println("No")
-			return
-		}
+	runesN := []rune(N)
+	sort.Slice(runesN, func(i, j int) bool {
+		return runesN[i] < runesN[j]
+	})
+	stringRunesN := string(runesN)
+	if stringRunesN == "122333" {
+		fmt.Println("Yes")
+	} else {
+		fmt.Println("No")
 	}
-	fmt.Println("Yes")
 	return
 }
